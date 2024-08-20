@@ -94,7 +94,7 @@ public class PessoaRequestHandlerStrategy implements RequestHandlerStrategy {
             StringBuilder lista = new StringBuilder();
             lista.append(String.format("%02d\n", pessoas.size()));
             for (Pessoa p : pessoas.values()) {
-                lista.append(p.getCpf()).append(";").append(p.getNome()).append(";").append(p.getEndereco()).append("\n");
+                lista.append(p.toString()).append("\n");
             }
             return lista.toString();
         }

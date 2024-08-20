@@ -16,4 +16,14 @@ public class Aluno extends Pessoa {
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
+
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "cpf='" + getCpf() + "', " +
+                "nome='" + getNome() + "', " +
+                "endereco='" + getEndereco() + "', " +
+                "matricula='" + matricula + "'}";
+    }
+
 }

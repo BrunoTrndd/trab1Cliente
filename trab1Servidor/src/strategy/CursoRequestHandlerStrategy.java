@@ -82,7 +82,7 @@ public class CursoRequestHandlerStrategy implements RequestHandlerStrategy {
             StringBuilder lista = new StringBuilder();
             lista.append(String.format("%02d\n", cursos.size()));
             for (Curso c : cursos) {
-                lista.append(c.getNomeCurso()).append(";").append(c.getSala()).append("\n");
+                lista.append(c.toString()).append("\n");
             }
             return lista.toString();
         }

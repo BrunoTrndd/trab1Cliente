@@ -16,4 +16,14 @@ public class Professor extends Pessoa {
     public void setSalario(String salario) {
         this.salario = salario;
     }
+
+    @Override
+    public String toString() {
+        return "Professor{" +
+                "cpf='" + getCpf() + "', " +
+                "nome='" + getNome() + "', " +
+                "endereco='" + getEndereco() + "', " +
+                "salario='" + salario + "'}";
+    }
+
 }
