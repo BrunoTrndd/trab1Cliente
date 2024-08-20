@@ -33,6 +33,7 @@ public class Servidor {
              PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
 
             String input = in.readLine();
+            trataCamposObrigatorios(input);
             RequestDTO request = RequestDTO.fromString(input);
 
             RequestHandlerStrategy handler;
@@ -44,6 +45,14 @@ public class Servidor {
 
             String response = handler.handleRequest(request);
             out.println(response);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    private static void trataCamposObrigatorios(String input) throws Exception {
+        if(!input.contains("operacao")) {
+            throw new Exception("Operação é um campo obrigatório para processamento");
         }
     }
 }

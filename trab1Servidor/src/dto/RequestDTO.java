@@ -1,5 +1,10 @@
 package dto;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class RequestDTO {
+
     private String operacao;
     private String cpf;
     private String nome;
@@ -8,8 +13,10 @@ public class RequestDTO {
     private String salario;
     private String nomeCurso;
     private String sala;
+    private List<String> integrantes;
+    private String professor;
 
-    public RequestDTO(String operacao, String cpf, String nome, String endereco, String matricula, String salario, String nomeCurso, String sala) {
+    public RequestDTO(String operacao, String cpf, String nome, String endereco, String matricula, String salario, String nomeCurso, String sala, List<String> integrantes, String professor) {
         this.operacao = operacao;
         this.cpf = cpf;
         this.nome = nome;
@@ -18,6 +25,12 @@ public class RequestDTO {
         this.salario = salario;
         this.nomeCurso = nomeCurso;
         this.sala = sala;
+        this.integrantes = integrantes;
+        this.professor = professor;
+    }
+
+    public RequestDTO() {
+
     }
 
     public String getOperacao() {
@@ -84,7 +97,25 @@ public class RequestDTO {
         this.sala = sala;
     }
 
+    public List<String> getIntegrantes() {
+        return integrantes;
+    }
+
+    public void setIntegrantes(List<String> integrantes) {
+        this.integrantes = integrantes;
+    }
+
+    public String getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(String professor) {
+        this.professor = professor;
+    }
+
     public static RequestDTO fromString(String input) {
+
+        input = input.replace("\"", "");
         String[] parts = input.split(",");
         String operacao = null;
         String cpf = null;
@@ -94,6 +125,8 @@ public class RequestDTO {
         String salario = null;
         String nomeCurso = null;
         String sala = null;
+        String professor = null;
+        List<String> integrantes = new ArrayList<>();
 
         for (String part : parts) {
             String[] keyValue = part.split(":");
@@ -125,12 +158,23 @@ public class RequestDTO {
                 case "sala":
                     sala = value;
                     break;
+                case "integrantes":
+                    // Assumindo que os integrantes sejam passados como uma lista de CPFs separados por ";"
+                    assert value != null;
+                    String[] cpfArray = value.split(";");
+                    for (String cpfIntegrante : cpfArray) {
+                        integrantes.add(cpfIntegrante.trim());
+                    }
+                    break;
+                case "professor":
+                    professor = value;
+                    break;
                 default:
                     // Campo desconhecido, ignorar ou lançar exceção dependendo do caso
                     break;
             }
         }
 
-        return new RequestDTO(operacao, cpf, nome, endereco, matricula, salario, nomeCurso, sala);
+        return new RequestDTO(operacao, cpf, nome, endereco, matricula, salario, nomeCurso, sala, integrantes, professor);
     }
 }

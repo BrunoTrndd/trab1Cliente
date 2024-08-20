@@ -9,7 +9,7 @@ public class Cliente {
              BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
             // Aqui você coletaria as informações do usuário e formataria a mensagem
-            String request = "{ operacao: \"INSERT\", cpf: \"12345678901\", nome: \"João\", endereco: \"Rua A\" }";
+            String request = "operacao: \"get\", cpf: \"12345678901\", nome: \"João2\", endereco: \"Rua A\", matricula: 1";
             out.println(request);
 
             String response = in.readLine();
