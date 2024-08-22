@@ -18,7 +18,6 @@ public class Servidor {
 
             while (true) {
                 try (Socket clientSocket = serverSocket.accept()) {
-                    System.out.println("processando");
                     handleClient(clientSocket);
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -11,6 +11,9 @@ public abstract class Pessoa {
         this.endereco = endereco;
     }
 
+    public Pessoa() {
+    }
+
     public String getCpf() {
         return cpf;
     }

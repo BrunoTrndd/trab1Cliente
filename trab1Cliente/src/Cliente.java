@@ -20,9 +20,11 @@ public class Cliente {
                     return;
                 }
                 out.println(request);
-
-                String response = in.readLine();
-                System.out.println("Resposta do servidor: " + response);
+                String response;
+                System.out.print("Resposta do servidor: ");
+                while ((response = in.readLine()) != null) {
+                    System.out.println(response);
+                }
             } catch(IOException e){
                 e.printStackTrace();
             }

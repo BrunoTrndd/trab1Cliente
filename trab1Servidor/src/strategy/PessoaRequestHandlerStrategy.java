@@ -1,6 +1,7 @@
 package strategy;
 
 import dto.RequestDTO;
+import factory.PessoaFactory;
 import model.Aluno;
 import model.Pessoa;
 import model.Professor;
@@ -42,11 +43,11 @@ public class PessoaRequestHandlerStrategy implements RequestHandlerStrategy {
     private String inserirPessoa(RequestDTO request) {
         if (request.getCpf() != null && !request.getCpf().isEmpty()) {
             if (request.getMatricula() != null) {
-                Aluno aluno = new Aluno(request.getCpf(), request.getNome(), request.getEndereco(), request.getMatricula());
+                Pessoa aluno = PessoaFactory.createAluno(request.getCpf(), request.getNome(), request.getEndereco(), request.getMatricula());
                 pessoas.put(request.getCpf(), aluno);
                 return "Aluno inserido com sucesso";
             } else if (request.getSalario() != null) {
-                Professor professor = new Professor(request.getCpf(), request.getNome(), request.getEndereco(), request.getSalario());
+                Pessoa professor = PessoaFactory.createProfessor(request.getCpf(), request.getNome(), request.getEndereco(), request.getSalario());
                 pessoas.put(request.getCpf(), professor);
                 return "Professor inserido com sucesso";
             } else {

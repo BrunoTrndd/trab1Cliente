@@ -1,6 +1,7 @@
 package strategy;
 
 import dto.RequestDTO;
+import factory.CursoFactory;
 import model.Curso;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class CursoRequestHandlerStrategy implements RequestHandlerStrategy {
 
     private String inserirCurso(RequestDTO request) {
         if (request.getNomeCurso() != null && !request.getNomeCurso().isEmpty()) {
-            Curso curso = new Curso(request.getNomeCurso(), request.getSala());
+            Curso curso = CursoFactory.create(request.getNomeCurso(), request.getSala());
             cursos.add(curso);
             return "Curso inserido com sucesso";
         }
