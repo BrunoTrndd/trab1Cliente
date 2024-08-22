@@ -18,6 +18,7 @@ public class Servidor {
 
             while (true) {
                 try (Socket clientSocket = serverSocket.accept()) {
+                    System.out.println("processando");
                     handleClient(clientSocket);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -30,14 +31,14 @@ public class Servidor {
 
     private static void handleClient(Socket clientSocket) throws Exception {
         try (BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
-
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
             String input = in.readLine();
+            System.out.println(input);
             trataCamposObrigatorios(input);
             RequestDTO request = RequestDTO.fromString(input);
 
             RequestHandlerStrategy handler;
-            if (request.getNomeCurso() != null) {
+            if (request.getNomeCurso() != null || request.getOperacao().equalsIgnoreCase("listcurso")) {
                 handler = new CursoRequestHandlerStrategy(cursos);
             } else {
                 handler = new PessoaRequestHandlerStrategy(pessoas);

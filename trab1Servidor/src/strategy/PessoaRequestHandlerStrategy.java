@@ -31,7 +31,7 @@ public class PessoaRequestHandlerStrategy implements RequestHandlerStrategy {
             case "delete":
                 return removerPessoa(request);
 
-            case "list":
+            case "listpessoa":
                 return listarPessoas();
 
             default:
@@ -74,7 +74,7 @@ public class PessoaRequestHandlerStrategy implements RequestHandlerStrategy {
     private String obterPessoa(RequestDTO request) {
         Pessoa pessoa = pessoas.get(request.getCpf());
         if (pessoa != null) {
-            return pessoa.getCpf() + ";" + pessoa.getNome() + ";" + pessoa.getEndereco();
+            return pessoa.toString();
         }
         return "Pessoa não encontrada";
     }
@@ -89,7 +89,7 @@ public class PessoaRequestHandlerStrategy implements RequestHandlerStrategy {
 
     private String listarPessoas() {
         if (pessoas.isEmpty()) {
-            return "0";
+            return "Não há pessoas";
         } else {
             StringBuilder lista = new StringBuilder();
             lista.append(String.format("%02d\n", pessoas.size()));

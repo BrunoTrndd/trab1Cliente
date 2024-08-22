@@ -17,19 +17,19 @@ public class CursoRequestHandlerStrategy implements RequestHandlerStrategy {
     @Override
     public String handleRequest(RequestDTO request) {
         switch (request.getOperacao().toLowerCase()) {
-            case "INSERT":
+            case "insert":
                 return inserirCurso(request);
 
-            case "UPDATE":
+            case "update":
                 return atualizarCurso(request);
 
-            case "GET":
+            case "get":
                 return obterCurso(request);
 
-            case "DELETE":
+            case "delete":
                 return removerCurso(request);
 
-            case "LIST":
+            case "listcurso":
                 return listarCursos();
 
             default:
@@ -59,7 +59,7 @@ public class CursoRequestHandlerStrategy implements RequestHandlerStrategy {
     private String obterCurso(RequestDTO request) {
         for (Curso curso : cursos) {
             if (curso.getNomeCurso().equals(request.getNomeCurso())) {
-                return curso.getNomeCurso() + ";" + curso.getSala();
+                return curso.toString();
             }
         }
         return "Curso não encontrado";
